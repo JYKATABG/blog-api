@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --env-file=.env server.js"
+    "dev": "nodemon --env-file=.env server.js",
+    "kill": "taskkill /F /IM node.exe",
+    "restart": "npm run kill && npm run dev",
+    "db:create": "createdb blog-api",
+    "db:setup": "psql -U postgres -d blog-api -f database/schema.sql",
+    "db:seed": "psql -U postgres -d blog-api -f database/seed.sql"
   },
   "keywords": [],
   "type": "module",
