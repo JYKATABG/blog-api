@@ -2,7 +2,7 @@ import { pool } from "../config/db.js";
 import { HttpError } from "../utils/HttpError.js";
 
 export const isAdmin = async (req, res, next) => {
-  const userId = req.userId || parseInt(req.params.userId);
+  const userId = req.userId;
 
   const result = await pool.query(`SELECT role FROM users WHERE id = $1`, [
     userId,

@@ -20,12 +20,12 @@ import { isAdmin } from "../middlewares/auth.js";
 const userRouter = Router();
 
 // GET ALL USERS WITH PAGINATION
-userRouter.get("/", isAdmin, paginateUsers);
+userRouter.get("/", paginateUsers);
 
 userRouter.get("/search", authenticate, isAdmin, searchUsers);
 
 // GET USER BY ID
-userRouter.get("/:userId", isAdmin, getUserValidation, validate, getUserById);
+userRouter.get("/:userId", authenticate, isAdmin, getUserValidation, validate, getUserById);
 
 // CREATE USER
 // userRouter.post("/", createUserValidation, validate, createUser)
