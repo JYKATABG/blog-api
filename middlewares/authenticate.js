@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import { HttpError } from "../utils/HttpError.js";
+import { findUserById } from "../repositories/user.repository.js";
 
-const authenticate = (req, res, next) => {
+const authenticate = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization || req.headers.Authorization;
 
@@ -21,6 +22,12 @@ const authenticate = (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+    const user = await findUserById(decoded.userId);
+
+    if (!user) {
+      throw new HttpError('User no longer exists', 401, "USER_NOT_FOUND");
+    }
+
     if (!decoded.userId) {
       throw new HttpError(
         "Invalid token payload",
@@ -30,7 +37,11 @@ const authenticate = (req, res, next) => {
     }
 
     req.userId = decoded.userId;
-    req.user = decoded;
+    req.user = {
+      email: user.email,
+      role: user.role,
+      isAdmin: user.role === 'admin'
+    }
 
     next();
   } catch (error) {

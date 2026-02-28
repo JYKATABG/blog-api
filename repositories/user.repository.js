@@ -3,7 +3,7 @@ import { pool } from "../config/db.js";
 export const findUserById = async (userId) => {
   const { rows } = await pool.query(
     `
-        SELECT id, username, email FROM users
+        SELECT id, username, email, role FROM users
         WHERE id = $1
         `,
     [userId],
@@ -22,7 +22,7 @@ export const getUserRole = async (userId) => {
 
 export const getPaginatedUsers = async (limit, offset) => {
   const result = await pool.query(
-    `SELECT id, email, username, created_at
+    `SELECT id, email, username, role, created_at
         FROM users
         ORDER BY created_at DESC
         LIMIT $1 OFFSET $2
