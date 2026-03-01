@@ -6,7 +6,7 @@ import {
   searchUsers,
   updateRole,
   updateUser,
-} from "../controllers/userController.js";
+} from "../controllers/user.controller.js";
 import {
   createUserValidation,
   deleteUserValidation,
@@ -25,7 +25,14 @@ userRouter.get("/", paginateUsers);
 userRouter.get("/search", authenticate, isAdmin, searchUsers);
 
 // GET USER BY ID
-userRouter.get("/:userId", authenticate, isAdmin, getUserValidation, validate, getUserById);
+userRouter.get(
+  "/:userId",
+  authenticate,
+  isAdmin,
+  getUserValidation,
+  validate,
+  getUserById,
+);
 
 // CREATE USER
 // userRouter.post("/", createUserValidation, validate, createUser)

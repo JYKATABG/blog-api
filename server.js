@@ -1,9 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
-import userRouter from "./routes/userRouter.js";
-import authRouter from "./routes/authRouter.js";
-import postRouter from "./routes/postRouter.js";
+import userRouter from "./routes/user.route.js";
+import authRouter from "./routes/auth.route.js";
+import postRouter from "./routes/post.route.js";
 import errorHandler from "./middlewares/errorHandler.js";
 import { HttpError } from "./utils/HttpError.js";
 import rateLimit from "express-rate-limit";

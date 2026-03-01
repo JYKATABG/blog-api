@@ -6,7 +6,7 @@ import {
   paginatePosts,
   searchPost,
   updatePost,
-} from "../controllers/postController.js";
+} from "../controllers/post.controller.js";
 import authenticate from "../middlewares/authenticate.js";
 import {
   createAndUpdateComment,
